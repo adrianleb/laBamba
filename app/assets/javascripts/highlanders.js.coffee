@@ -62,15 +62,20 @@ class One
     @runChecker = false
 
 
-  checker: ->
+  checker: (timestamp) ->
     if one.runChecker
-      window.webkitRequestAnimationFrame one.checker
+      window.webkitRequestAnimationFrame ( (timestamp) =>
+        one.checker(timestamp)
+      )
+      one.currentTime = (timestamp - one.startTime) / 100
+      console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
 
 
   acmeLoader: (hash) ->
-    time = 0
+    @startTime = Date.now()
+    @currentTime = 0
     hash.currentTime = 0
  
     for c in Object.keys(hash) 
