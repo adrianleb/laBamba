@@ -41,4 +41,4 @@ class window.SoundMachinez
     setTimeout(@preloaded[sound_key].initbuff, @preloaded[sound_key].bytes.byteLength/@context.sampleRate)
 
   play_note: (instrument, frequency, length) ->
-    NotePlayer.play(@context, frequency, length)
+    NotePlayer.play(@context, frequency, length*1000)

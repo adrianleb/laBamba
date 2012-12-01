@@ -86,7 +86,6 @@ class One
         action = hash[c][hash[c].current].action
         args = hash[c][hash[c].current].arguments
 
-      @[action](args)
   
 
   acmeChecker: (hash=window.ag.acme) ->
@@ -120,5 +119,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator()
+  window.ag = new AcmeGenerator(60)
   window.sm = new SoundMachinez()
