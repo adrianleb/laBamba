@@ -37,13 +37,15 @@ class window.AcmeGenerator
         @acme[instrument] = @generate_harmonic_lane(lane, instrument)
 
   generate_simple_lane: (lane, instrument) ->
-    t = 0
+    t = 0.0
     result = []
-
-    _(Math.ceil(@length/(@period*lane['probs'].length))).times ->
+    
+    _(Math.ceil(@length/(@period*lane['probs'].length))).times =>
       _.each lane['probs'], (prob) =>
+
         if Math.random() <= prob
           result.push {start: t, action: 'play', arguments: [instrument]}
+        
         t+=@period
 
     return result
