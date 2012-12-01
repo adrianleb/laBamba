@@ -31,6 +31,8 @@ class One
   sendWords: ->
     @text = $('#text-input').val()
     console.log @text
+    $('#intro').addClass 'begone_up'
+    $('#loader').removeClass 'begone_down'
     # do http request
     $.ajax
       type: 'POST'
@@ -40,12 +42,13 @@ class One
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
+        $('#loader').addClass 'begone_up'
+        $('#player').removeClass 'begone_down'
+
       ,
       dataType: 'json'
 
   bailaLaBamba: ->
-    $('#intro').addClass 'begone_up'
-    $('#player').removeClass 'begone_down'
     @runChecker = true
 
     # add the wave words to the proloader and preload
@@ -53,7 +56,6 @@ class One
       sm.sounds[word.name] = word.sound_url
     sm.preload =>
       @checker()
-
 
     if window.ag?
       window.ag.generate()
@@ -115,7 +117,7 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-  
+
     if ['play', 'show_word', 'show_image'].indexOf(action) > -1
       sm[action](args[0])
     else if action is 'play_note'
