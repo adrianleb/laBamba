@@ -27,6 +27,6 @@ class One
   
   
 
-
-window.one = new One
-window.ag = new AcmeGenerator()
+$ ->
+  window.one = new One
+  window.ag = new AcmeGenerator()
