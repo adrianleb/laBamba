@@ -86,10 +86,24 @@ class One
 
       @[action](args)
   
+
   acmeChecker: (hash=window.ag.acme) ->
 
     for c in Object.keys(hash) 
-      console.log hash[c]
+      if typeof hash[c] is 'object'
+        for s in hash[c] 
+          if Math.round(s.start - one.currentTime) is 0
+            index = hash[c].indexOf s
+            hash[c].current = index
+            @acmeAct hash[c]
+
+
+
+  acmeAct: (channel) ->
+    action = channel[channel.current].action
+    args = channel[channel.current].arguments
+    @[action](args)
+
       # hash[c].current = 0
   
   play: (arg) ->
