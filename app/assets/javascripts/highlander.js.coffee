@@ -62,7 +62,7 @@ class One
       window.webkitRequestAnimationFrame one.checker
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
-    console.log 'omg'
+    # console.log 'omg'
     # adrian codes here
   
   
