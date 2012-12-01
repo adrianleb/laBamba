@@ -13,8 +13,6 @@
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
-<<<<<<< HEAD
+
 
 public/wav/*
-=======
->>>>>>> 86499c5a401b77fca7513ea7b01df8c32b3a5fc3

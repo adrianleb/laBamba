@@ -8,7 +8,9 @@ class window.AcmeGenerator
     '0' : type: 'harmonic', maxvol: 0.01, octave: 6, probs: [ 1,   0,   0.3,   0,   0.8,   0,   0.1,   0,   1,   0,   0.5,   0.2  ]
     '3' : type: 'harmonic', maxvol: 0.6, octave: 3, probs: [ 1,   0.5]# [1 ,0   0.3,   0,   0.8,   0,   0.1,   0,   1,   0,   0.5,   0.2  ]
     '1' : type: 'harmonic', maxvol: 0.6, octave: 2, probs: [ 1,   0.5]
+
     'speech': type: 'speech'
+
   acme: {}
 
   tempo      : null
