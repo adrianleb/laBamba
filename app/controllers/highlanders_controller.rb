@@ -8,7 +8,8 @@ class HighlandersController < ApplicationController
     words.each do |w|
       # TODO remove emtpy and stop words
       word = Word.find_by_name(w)
-      word = Word.create(image: image(w), name: w, sound: sound(w)) unless word
+      s = sound(w)
+      word = Word.create(image: image(w), name: w, sound_url: s[:url], sound_duration: s[:duration]) unless word
       dictionary << word
     end
 
@@ -48,10 +49,12 @@ class HighlandersController < ApplicationController
     # sudo apt-get install gespeaker xsel
     # espeak -v en "Hello I am marcel" -w ~/lala.wav 
     file_path = Rails.root.join("public", "wav", "#{w}.wav")
-    print 'file_path: ' + file_path.to_s
     result = `espeak -v en "#{w}" -w #{file_path}`
-    puts 'result: ' + result.to_s
-    File.join('http://localhost:3000/', "wav", "#{w}.wav")
+
+    # sox public/wav/marcel.wav -n stat 2>&1 | grep Length | cut -d : -f 2
+    duration = `sox #{file_path} -n stat 2>&1 | grep Length | cut -d : -f 2`.strip
+
+    {url: File.join('http://localhost:3000/', "wav", "#{w}.wav"), duration: duration}
   end
 
 
