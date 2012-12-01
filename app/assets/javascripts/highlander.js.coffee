@@ -29,14 +29,11 @@ class One
       ,
       dataType: 'json'
       # when get the response @bailaLaBamba()
-
+    @bailaLaBamba()
 
   bailaLaBamba: ->
-    intro = $('#intro')
-    player $('#player')
-
-    intro.addClass 'begone_up'
-    player.removeClass 'begone_down'
+    $('#intro').addClass 'begone_up'
+    $('#player').removeClass 'begone_down'
 
     # adrian codes here
   
