@@ -16,7 +16,9 @@ class One
     cl('one')
 
     # submit the text
-    $('#text-submit').on 'click', =>
+    $('#text-submit').on 'click', (e) =>
+      nop e
+
       cl('loklol')
       @sendWords()
 
