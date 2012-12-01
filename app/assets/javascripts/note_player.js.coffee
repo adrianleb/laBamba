@@ -7,15 +7,14 @@ class NotePlayer
     
     gainNode = context.createGainNode()
     
-    oscillator.connect(gainNode)
-    
-    gainNode.connect(context.destination)
-    
+    filterNode = context.createBiquadFilter()
+    filterNode.type = "lowpass"
+    filterNode.frequency.value = 300
 
-    delayNode = context.createDelayNode();
-    delayNode.delayTime.value = 1.5;
-    gainNode.connect(delayNode)
-    delayNode.connect(gainNode)
+    oscillator.connect(filterNode)
+    filterNode.connect(gainNode)
+
+    gainNode.connect(context.destination)
 
     gainNode.gain.value = 0.0
     gainNode.gain.linearRampToValueAtTime(0.3, context.currentTime + 0.01)
