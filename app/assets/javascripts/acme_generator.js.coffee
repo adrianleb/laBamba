@@ -1,4 +1,4 @@
-class AcmeGenerator
+class window.AcmeGenerator
   
   probs:
     'kick'  : [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
@@ -17,8 +17,15 @@ class AcmeGenerator
     @period = (60 / tempo)
     @midi = (@midi_to_freq(i) for i in [0..127])
 
+  test: ->
+    console.log(@tempo)
+    console.log(@period)
+    console.log(@midi)
+
   generate: (length = 10) ->
-    null
+    console.log(@probs)
+    _.each(@probs, ->
+      console.log(lane))
 
   midi_to_freq: (n) ->
     (2^((n-69)/12))*440

@@ -1,6 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 window.cl = (s) ->
   console.debug(s)
@@ -35,10 +32,16 @@ class One
 
 
   bailaLaBamba: ->
+    intro = $('#intro')
+    player $('#player')
+
+    intro.addClass 'begone_up'
+    player.removeClass 'begone_down'
+
     # adrian codes here
   
   
 
-
-window.one = new One
-
+$ ->
+  window.one = new One
+  window.ag = new AcmeGenerator()
