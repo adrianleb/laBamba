@@ -24,7 +24,6 @@ class One
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
-      cl 'yolo'
       nop e
       @backToPoetry()
 
@@ -71,7 +70,12 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
+<<<<<<< HEAD
+      
+      # console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
+=======
+>>>>>>> 93d5738fe99a1b28f66effd3cd7d091f3525b60e
       @acmeChecker()
 
 
@@ -94,10 +98,10 @@ class One
       if typeof hash[c] is 'object'
         index =  hash[c].current
 
-
-        if hash[c][index].start <= one.currentTime
-          hash[c].current += 1
-          @acmeAct hash[c]
+        unless not hash[c][index]?
+          if hash[c][index].start <= one.currentTime
+            hash[c].current += 1
+            @acmeAct hash[c]
 
 
         # indexes = _.pluck hash[c], 'start'
@@ -113,9 +117,16 @@ class One
 
 
   acmeAct: (channel) ->
+      # console.log 'amagad'
+      # channel.current = 0
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-    sm[action](args[0])
+    
+    if action is 'play'
+      sm[action](args[0])
+    else if action is 'play_note'
+      sm[action](args[0], args[1], args[2])
+    one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
 $ ->
   window.one = new One
