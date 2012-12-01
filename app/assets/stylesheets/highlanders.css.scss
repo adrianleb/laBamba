@@ -32,17 +32,17 @@ html, body {
    }
 }
 
-
-
-
 .logo {
   font-size:5rem;
   text-align: center;
   line-height: 5rem;
   width:5rem;
   height: 5rem;
-   -webkit-animation: spin 5s infinite;
-   -webkit-animation-timing-function:linear;
+  -webkit-animation: spin 5s infinite;
+  -webkit-animation-timing-function:linear;
+  &:hover{
+    text-shadow: 0 0 5px pink;
+  }
 }
 
 #logo{

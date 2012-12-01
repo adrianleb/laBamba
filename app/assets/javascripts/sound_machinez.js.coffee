@@ -22,8 +22,6 @@ class window.SoundMachinez
       request.responseType = 'arraybuffer'
       request.key = key
       request.addEventListener('load', (=>
-                                        cl(@loaded)
-                                        cl(Object.keys(@sounds).length)
                                         @add_to_context(request, key)
                                         if @loaded == Object.keys(@sounds).length
                                           callback()
