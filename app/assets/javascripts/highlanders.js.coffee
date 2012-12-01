@@ -124,6 +124,6 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator()
+  window.ag = new AcmeGenerator(60)
   window.sm = new SoundMachinez()
   sm.preload()
