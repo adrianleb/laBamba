@@ -4,6 +4,12 @@
 
 @import "compass/reset";
 
+
+// hack it up, wildcard
+*, *:before, *:after {
+  position: relative;
+  box-sizing:border-box;
+}
 @-webkit-keyframes spin {
   0%   { -webkit-transform:rotateZ(0deg); }
   100% {
@@ -15,14 +21,21 @@
 
 
 .logo {
-  // margin: 0 auto;
-  // margin-top: 5rem;
   font-size:5rem;
   text-align: center;
   line-height: 5rem;
   width:5rem;
   height: 5rem;
-  // background-color: grey;
    -webkit-animation: spin 5s infinite;
    -webkit-animation-timing-function:linear;
+}
+
+
+.intro {
+  width: 100%;
+  padding:5%;
+  background-color: red;
+  textarea {
+    width:100%;
+  }
 }
