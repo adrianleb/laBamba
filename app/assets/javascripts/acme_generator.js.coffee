@@ -6,7 +6,9 @@ class window.AcmeGenerator
     'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
     'sound_1' : type: 'harmonic', octave: 6, probs: [ 0.1 ]
     'sound_2' : type: 'harmonic', octave: 7, probs: [ 0.4, 0.8, 0.3, 0]
-    'speech'   : type: 'speech'
+    'speech'  : type: 'speech'
+    'words'   : type: 'words'
+    'images'  : type: 'images'
 
   acme: {}
 
@@ -40,6 +42,13 @@ class window.AcmeGenerator
 
       if lane['type'] == 'speech'
         @acme[instrument] = @generate_speech_lane(lane, instrument)
+
+      if lane['type'] == 'words'
+        @acme[instrument] = @generate_words_lane(lane, instrument)
+
+      if lane['type'] == 'images'
+        @acme[instrument] = @generate_images_lane(lane, instrument)
+
 
   generate_simple_lane: (lane, instrument) ->
     t = 0.0
@@ -79,6 +88,28 @@ class window.AcmeGenerator
     while t <= @length
       _.each one.dictionary, (word) =>
         result.push {start: t, action: 'play', arguments: [word.name]}
+        t += parseFloat(word.sound_duration) + 0.3
+
+    return result
+
+  generate_words_lane: (lane, instrument) ->
+    t = 0
+    result = []
+
+    while t <= @length
+      _.each one.dictionary, (word) =>
+        result.push {start: t, action: 'show_word', arguments: [word.name]}
+        t += parseFloat(word.sound_duration) + 0.3
+
+    return result
+
+  generate_images_lane: (lane, instrument) ->
+    t = 0
+    result = []
+
+    while t <= @length
+      _.each one.dictionary, (word) =>
+        result.push {start: t, action: 'show_image', arguments: [word.image]}
         t += parseFloat(word.sound_duration) + 0.3
 
     return result
