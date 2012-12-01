@@ -27,10 +27,14 @@ class One
       nop e
       @backToPoetry()
 
+    @soundsPreloaded = false
+    @noImagesPreloaded = 0
+    $('#img-preloader img').on 'load', (e) =>
+      @imagesPreloaded = (++@noImagesPreloaded == @dictionary.length)
+      @checker()
       
   sendWords: ->
     @text = $('#text-input').val()
-    console.log @text
     # do http request
     $.ajax
       type: 'POST'
@@ -57,6 +61,7 @@ class One
 
     # preload the sounds
     sm.preload =>
+      @soundsPreloaded = true
       @checker()
 
 
@@ -72,7 +77,7 @@ class One
 
 
   checker: (timestamp) ->
-    if one.runChecker
+    if one.runChecker and @imagesPreloaded and @soundsPreloaded
       window.webkitRequestAnimationFrame ( (timestamp) =>
         one.checker(timestamp)
       )
