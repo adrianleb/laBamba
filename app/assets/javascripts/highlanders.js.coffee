@@ -34,7 +34,7 @@ class One
       @backToPoetry()
 
   sendWords: ->
-    @text = $('#text-input').val()
+    @text = $('#text-input').val().replace(","," ").replace("("," ").replace(")"," ")
     $('#intro').addClass 'begone_up'
     $('#loader').removeClass 'begone_down'
 
@@ -63,7 +63,7 @@ class One
 
       # preload the images
       cl('preloados: ' + word.name + ': ' + word.image)
-      if word.image?
+      if word.image? and word.image != 'null'
         cl('whatr')
         @imagesToPreload++
         $('#img-preloader').append('<img src="' + word.image + '">')
@@ -86,9 +86,9 @@ class One
       @soundsPreloaded = true
       @checker()
 
-    if window.ag?
-      window.ag.generate()
-      @acmeLoader()
+      if window.ag?
+        window.ag.generate()
+        @acmeLoader()
 
 
   backToPoetry: ->
@@ -142,5 +142,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator(40)
+  window.ag = new AcmeGenerator(90)
   window.sm = new SoundMachinez()
