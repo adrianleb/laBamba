@@ -20,7 +20,9 @@ class One
 
       @sendWords()
 
-
+    $("#logo").on 'click', (e) =>
+      $("body").toggleClass('fullscreen')
+      cl "MOOO"
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
