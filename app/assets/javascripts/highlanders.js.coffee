@@ -82,7 +82,6 @@ class One
         action = hash[c][hash[c].current].action
         args = hash[c][hash[c].current].arguments
 
-      @[action](args)
   
 
   acmeChecker: (hash=window.ag.acme) ->
