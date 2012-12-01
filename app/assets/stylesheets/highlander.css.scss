@@ -79,5 +79,8 @@ body {
     &:hover {
       background-color: lighten(black, 30%);
     }
+        &:active {
+      background-color:desaturate(lighten(green, 30%), 50%);
+    }
   }
 }
