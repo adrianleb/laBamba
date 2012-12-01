@@ -15,4 +15,4 @@
 /tmp
 
 
-/public/wav
+public/wav/*

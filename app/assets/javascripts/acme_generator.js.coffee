@@ -1,12 +1,13 @@
 class window.AcmeGenerator
   
   probs:
-    'kick'    : type: 'simple',   probs: [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
-    'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   1,   0  ]
-    'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-    'sound_1' : type: 'harmonic', octave: 6, probs: [ 0.1 ]
-    'sound_2' : type: 'harmonic', octave: 7, probs: [ 0.4, 0.8, 0.3, 0]
-    'speech'   : type: 'speech'
+    'kick'    : type: 'simple',   probs: [ 1,   0,   0.3,   0,   0.3,   0,   0.1,   0,   0.8,   0,   0.2,   0  ]
+    'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   0.7,   0,   0,   0.2,   0.6,   0  ]
+    'hihat'   : type: 'simple',   probs: [ 0.75, 0.5, 0.75, 0.25, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    '0' : type: 'harmonic', maxvol: 0.01, octave: 7, probs: [ 0.1 ]
+    '0' : type: 'harmonic', maxvol: 0.01, octave: 6, probs: [ 1,   0,   0.3,   0,   0.8,   0,   0.1,   0,   1,   0,   0.5,   0.2  ]
+    '3' : type: 'harmonic', maxvol: 0.6, octave: 3, probs: [ 1,   0.5]# [1 ,0   0.3,   0,   0.8,   0,   0.1,   0,   1,   0,   0.5,   0.2  ]
+    '1' : type: 'harmonic', maxvol: 0.6, octave: 2, probs: [ 1,   0.5]
 
   acme: {}
 
@@ -62,10 +63,10 @@ class window.AcmeGenerator
     while t <= @length
       _.each lane['probs'], (prob) =>
         if Math.random() <= prob
-          note_length = Math.floor((Math.random()*4)+1)*@period
+          note_length = Math.floor((Math.random()*8)+1)*@period
           t += note_length
           note = Math.floor((Math.random()*@scale[@use_scale].length)+1) + (lane['octave']*12)
-          result.push {start: t, action: 'play_note', arguments: [instrument, @midi_table[note], note_length]}
+          result.push {start: t, action: 'play_note', arguments: [instrument, @midi_table[note], note_length, lane['maxvol']]}
         else
           t+=@period
 
