@@ -90,14 +90,11 @@ class One
 
   acmeChecker: (hash=window.ag.acme) ->
 
-    indices = _.pluck hash, 'current'
-    for c in indices 
-      console.log c
-     
-
+    for c in Object.keys(hash) 
       if typeof hash[c] is 'object'
         for s in hash[c] 
-          if s.start <= one.currentTime
+
+          if Math.round(s.start - one.currentTime) is 0
             index = hash[c].indexOf s
             unless hash[c].current is index
               hash[c].current = index
