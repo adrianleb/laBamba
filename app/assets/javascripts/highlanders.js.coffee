@@ -70,12 +70,6 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
-<<<<<<< HEAD
-      
-      # console.log one.currentTime
-      one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
-=======
->>>>>>> 93d5738fe99a1b28f66effd3cd7d091f3525b60e
       @acmeChecker()
 
 
@@ -121,7 +115,7 @@ class One
       # channel.current = 0
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-    
+
     if action is 'play'
       sm[action](args[0])
     else if action is 'play_note'
@@ -130,5 +124,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator(60)
+  window.ag = new AcmeGenerator()
   window.sm = new SoundMachinez()
