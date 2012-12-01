@@ -68,6 +68,7 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
+      console.log one.currentTime
       # console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
       @acmeChecker()
@@ -89,13 +90,18 @@ class One
 
   acmeChecker: (hash=window.ag.acme) ->
 
-    for c in Object.keys(hash) 
+    indices = _.pluck hash, 'current'
+    for c in indices 
+      console.log c
+     
+
       if typeof hash[c] is 'object'
         for s in hash[c] 
-          if Math.round(s.start - one.currentTime) is 0
+          if s.start <= one.currentTime
             index = hash[c].indexOf s
-            hash[c].current = index
-            @acmeAct hash[c]
+            unless hash[c].current is index
+              hash[c].current = index
+              @acmeAct hash[c]
 
 
 
@@ -107,10 +113,10 @@ class One
       # hash[c].current = 0
   
   play: (arg) ->
-    console.log 'play func', arg
+    sm.play arg[0]
 
   play_note: (arg) ->
-    console.log 'play_note func', arg
+    # console.log 'play_note func', arg
 
 $ ->
   window.one = new One
