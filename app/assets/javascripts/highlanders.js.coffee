@@ -35,12 +35,9 @@ class One
       
   sendWords: ->
     @text = $('#text-input').val()
-<<<<<<< HEAD
-    console.log @text
     $('#intro').addClass 'begone_up'
     $('#loader').removeClass 'begone_down'
-=======
->>>>>>> 9dce2daf5c230fdc4cc2ef9f5606a386fbb84270
+
     # do http request
     $.ajax
       type: 'POST'
