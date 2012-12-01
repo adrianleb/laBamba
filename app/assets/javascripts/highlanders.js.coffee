@@ -48,9 +48,14 @@ class One
     $('#player').removeClass 'begone_down'
     @runChecker = true
 
-    # add the wave words to the proloader and preload
+    # add the wave words to the proloader
     _.each @dictionary, (word) =>
       sm.sounds[word.name] = word.sound_url
+
+      # preload the images
+      $('#img-preloader').append('<img src="' + word.image + '">')
+
+    # preload the sounds
     sm.preload =>
       @checker()
 
