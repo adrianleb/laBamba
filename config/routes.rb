@@ -1,3 +1,9 @@
 LaBamba::Application.routes.draw do
-  root :to => 'highlander#index'
+  resource :highlander do
+    member do
+      post 'dictionary'
+    end
+  end
+
+  root :to => 'highlanders#show'
 end
