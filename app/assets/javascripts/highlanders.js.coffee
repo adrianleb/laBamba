@@ -22,19 +22,12 @@ class One
 
     $("#logo").on 'click', (e) =>
       $("body").toggleClass('fullscreen')
-      cl "MOOO"
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
       nop e
       @backToPoetry()
 
-    @soundsPreloaded = false
-    @noImagesPreloaded = 0
-    $('#img-preloader img').on 'load', (e) =>
-      @imagesPreloaded = (++@noImagesPreloaded == @dictionary.length)
-      @checker()
-      
   sendWords: ->
     @text = $('#text-input').val()
     $('#intro').addClass 'begone_up'
@@ -59,12 +52,29 @@ class One
     @runChecker = true
 
     # add the wave words to the proloader
+    @imagesToPreload = 0
     _.each @dictionary, (word) =>
       sm.sounds[word.name] = word.sound_url
 
       # preload the images
+      cl('preloados: ' + word.name + ': ' + word.image)
       if word.image?
+        cl('whatr')
+        @imagesToPreload++
         $('#img-preloader').append('<img src="' + word.image + '">')
+
+    @soundsPreloaded = false
+    @noImagesPreloaded = 0
+
+    $('#img-preloader img').on 'load', (e) =>
+      cl " MIAU" 
+      @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
+      @checker()
+    $('#img-preloader img').on 'error', (e) =>
+      cl('fuck')
+      @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
+      @checker()
+
 
     # preload the sounds
     sm.preload =>
