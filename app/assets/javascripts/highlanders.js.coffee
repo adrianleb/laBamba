@@ -13,13 +13,11 @@ class One
     @canvas = $('#player-canvas')
 
   initEvents: ->
-    cl('one')
 
     # submit the text
     $('#text-submit').on 'click', (e) =>
       nop e
 
-      cl('loklol')
       @sendWords()
 
 
@@ -40,7 +38,6 @@ class One
         text: $('#text-input').text()
       success: (data) =>
         @dictionary = data
-        cl(@dictionary)
       ,
       dataType: 'json'
       # when get the response @bailaLaBamba()
