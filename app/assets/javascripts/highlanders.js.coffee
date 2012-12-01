@@ -38,16 +38,22 @@ class One
         text: $('#text-input').text()
       success: (data) =>
         @dictionary = data
+        @bailaLaBamba()
       ,
       dataType: 'json'
       # when get the response @bailaLaBamba()
-    @bailaLaBamba()
 
   bailaLaBamba: ->
     $('#intro').addClass 'begone_up'
     $('#player').removeClass 'begone_down'
     @runChecker = true
     @checker()
+
+    # add the wave words to the proloader and preload
+    _.each @dictionary, (word) =>
+      sm.sounds[word.id] = word.sound_url
+    sm.preload()
+
     if window.ag?
       window.ag.generate()
       @acmeLoader()
@@ -65,8 +71,6 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
-      # cl one.currentTime
-      # console.log one.currentTime
       @acmeChecker()
 
 
@@ -74,7 +78,7 @@ class One
     @startTime = Date.now()
     @currentTime = 0
     hash.currentTime = 0
-    for c in Object.keys(hash) 
+    for c in Object.keys(hash)
       hash[c].current = 0
 
       if typeof hash[c][hash[c].current] is 'object'
@@ -122,4 +126,3 @@ $ ->
   window.one = new One
   window.ag = new AcmeGenerator(60)
   window.sm = new SoundMachinez()
-  sm.preload()
