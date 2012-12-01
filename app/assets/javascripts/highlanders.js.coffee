@@ -24,7 +24,6 @@ class One
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
-      cl 'yolo'
       nop e
       @backToPoetry()
 
@@ -65,7 +64,7 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
-      cl one.currentTime
+      
       # console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
       @acmeChecker()
@@ -112,6 +111,7 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
+    console.log(arguments)
     sm[action](args[0])
 
 $ ->

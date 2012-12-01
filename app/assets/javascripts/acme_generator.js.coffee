@@ -1,9 +1,9 @@
 class window.AcmeGenerator
   
   probs:
-    'kick'    : type: 'simple',   probs: [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
-    'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   1,   0  ]
-    'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    #'kick'    : type: 'simple',   probs: [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
+    #'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   1,   0  ]
+    #'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
     'sound_1' : type: 'harmonic', octave: 4, probs: [ 0.1 ]
     'sound_2' : type: 'harmonic', octave: 3, probs: [ 0.4, 0.8, 0.3, 0]
 
