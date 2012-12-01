@@ -16,7 +16,9 @@ class One
     cl('one')
 
     # submit the text
-    $('#text-submit').on 'click', =>
+    $('#text-submit').on 'click', (e) =>
+      nop e
+
       cl('loklol')
       @sendWords()
 
@@ -62,7 +64,7 @@ class One
       window.webkitRequestAnimationFrame one.checker
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
-    console.log 'omg'
+    # console.log 'omg'
     # adrian codes here
   
   
