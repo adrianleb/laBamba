@@ -34,7 +34,7 @@ class One
       @backToPoetry()
 
   sendWords: ->
-    @text = $('#text-input').val().replace(","," ").replace("("," ").replace(")"," ")
+    @text = $('#text-input').val().replace(","," ").replace("("," ").replace(")"," ").replace("'"," ")
     $('#intro').addClass 'begone_up'
     $('#loader').removeClass 'begone_down'
 
