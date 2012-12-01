@@ -36,8 +36,6 @@ class window.AcmeGenerator
       if lane['type'] =='harmonic'
         @acme[instrument] = @generate_harmonic_lane(lane, instrument)
 
-    console.log(@acme)
-
   generate_simple_lane: (lane, instrument) ->
     t = 0
     result = []
