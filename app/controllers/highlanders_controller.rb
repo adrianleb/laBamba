@@ -45,7 +45,13 @@ class HighlandersController < ApplicationController
   end
 
   def sound(w)
-    'http://you.and.me/sound.mp3'
+    # sudo apt-get install gespeaker xsel
+    # espeak -v en "Hello I am marcel" -w ~/lala.wav 
+    file_path = Rails.root.join("public", "wav", "#{w}.wav")
+    print 'file_path: ' + file_path.to_s
+    result = `espeak -v en "#{w}" -w #{file_path}`
+    puts 'result: ' + result.to_s
+    File.join('http://localhost:3000/', "wav", "#{w}.wav")
   end
 
 
