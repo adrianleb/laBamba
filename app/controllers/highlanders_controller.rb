@@ -38,7 +38,7 @@ class HighlandersController < ApplicationController
         request = open("http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=14ca15db980e203bfd67bc0dd8468aa5&photo_id=#{photo['id']}&format=json&nojsoncallback=1")
         json = request.read
         sizes = JSON.parse json
-        last = sizes['sizes']['size'].last
+        last = sizes['sizes']['size'][(sizes['sizes']['size'].length/2).ceil]
         result = last['source'] if last.present?
       end
     end
