@@ -30,18 +30,18 @@ class One
 
       
   sendWords: ->
+    @text = $('#text-input').text()
     # do http request
     $.ajax
       type: 'POST'
       url: '/highlander/dictionary'
       data:
-        text: $('#text-input').text()
+        text: @text
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
       ,
       dataType: 'json'
-      # when get the response @bailaLaBamba()
 
   bailaLaBamba: ->
     $('#intro').addClass 'begone_up'

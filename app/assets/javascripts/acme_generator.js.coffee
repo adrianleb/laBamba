@@ -6,6 +6,7 @@ class window.AcmeGenerator
     'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
     'sound_1' : type: 'harmonic', octave: 4, probs: [ 0.1 ]
     'sound_2' : type: 'harmonic', octave: 3, probs: [ 0.4, 0.8, 0.3, 0]
+    'speech'   : type: 'speech'
 
   acme: {}
 
@@ -37,6 +38,11 @@ class window.AcmeGenerator
       if lane['type'] =='harmonic'
         @acme[instrument] = @generate_harmonic_lane(lane, instrument)
 
+      if lane['type'] =='harmonic'
+        @acme[instrument] = @generate_speech_lane(lane, instrument)
+
+
+
   generate_simple_lane: (lane, instrument) ->
     t = 0.0
     result = []
@@ -66,6 +72,19 @@ class window.AcmeGenerator
           t+=@period
 
     return result
+
+
+  generate_speech_lane: (lane, instrument) ->
+    t = 0
+    result = []
+
+    while t <= @length
+      _.each one.dictionary, (word) =>
+        result.push {start: t, action: 'play', arguments: [instrument, word.id]}
+        t += word.sound_duration + 0.3
+
+    return result
+
 
   midi_to_freq: (n) ->
     Math.pow(2,((n-69)/12))*440
