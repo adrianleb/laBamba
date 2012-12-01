@@ -57,7 +57,8 @@ class One
       sm.sounds[word.name] = word.sound_url
 
       # preload the images
-      $('#img-preloader').append('<img src="' + word.image + '">')
+      if word.image?
+        $('#img-preloader').append('<img src="' + word.image + '">')
 
     # preload the sounds
     sm.preload =>
