@@ -11,7 +11,6 @@ class window.SoundMachinez
 
   constructor: ->
     @context = new webkitAudioContext();
-    @node = @context.createJavaScriptNode(1024, 1, 1);
 
   preload: ->
 
@@ -40,3 +39,6 @@ class window.SoundMachinez
   play: (sound_key) ->
     @preloaded[sound_key].buffer_source.noteOn(0)
     setTimeout(@preloaded[sound_key].initbuff, @preloaded[sound_key].bytes.byteLength/@context.sampleRate)
+
+  play_note: (instrument, frequency, length) ->
+    NotePlayer.play(@context, frequency, length)
