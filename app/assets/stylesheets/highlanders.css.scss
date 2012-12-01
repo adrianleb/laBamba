@@ -144,6 +144,22 @@ section {
 }
 
 
+.loader {
+  width:100%;
+  text-align: center;
+  margin-top: 3rem;
+  -webkit-transition:all 0.5s ease-out;
+  .loader__text {
+    font-size: 3rem;
+    font-weight: bold;
+  }
+}
+
+
+.hidden {
+  opacity: 0;
+  z-index: -2;
+}
 .player {
   width:100%;
 

@@ -29,10 +29,17 @@ class One
       nop e
       @backToPoetry()
 
+    @soundsPreloaded = false
+    @noImagesPreloaded = 0
+    $('#img-preloader img').on 'load', (e) =>
+      @imagesPreloaded = (++@noImagesPreloaded == @dictionary.length)
+      @checker()
       
   sendWords: ->
     @text = $('#text-input').val()
-    console.log @text
+    $('#intro').addClass 'begone_up'
+    $('#loader').removeClass 'begone_down'
+
     # do http request
     $.ajax
       type: 'POST'
@@ -42,20 +49,26 @@ class One
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
+        $('#loader').addClass 'begone_up'
+        $('#player').removeClass 'begone_down'
+
       ,
       dataType: 'json'
 
   bailaLaBamba: ->
-    $('#intro').addClass 'begone_up'
-    $('#player').removeClass 'begone_down'
     @runChecker = true
 
-    # add the wave words to the proloader and preload
+    # add the wave words to the proloader
     _.each @dictionary, (word) =>
       sm.sounds[word.name] = word.sound_url
-    sm.preload =>
-      @checker()
 
+      # preload the images
+      $('#img-preloader').append('<img src="' + word.image + '">')
+
+    # preload the sounds
+    sm.preload =>
+      @soundsPreloaded = true
+      @checker()
 
     if window.ag?
       window.ag.generate()
@@ -69,7 +82,7 @@ class One
 
 
   checker: (timestamp) ->
-    if one.runChecker
+    if one.runChecker and @imagesPreloaded and @soundsPreloaded
       window.webkitRequestAnimationFrame ( (timestamp) =>
         one.checker(timestamp)
       )
