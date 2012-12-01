@@ -10,6 +10,7 @@ class One
   constructor: ->
     @initEvents()
     @runChecker = true
+    @canvas = $('#player-canvas')
 
   initEvents: ->
     cl('one')
@@ -46,15 +47,22 @@ class One
   bailaLaBamba: ->
     $('#intro').addClass 'begone_up'
     $('#player').removeClass 'begone_down'
+    @runChecker = true
+    @checker()
 
 
   backToPoetry: ->
     $('#intro').removeClass 'begone_up'
     $('#player').addClass 'begone_down'
+    @runChecker = false
+
 
   checker: ->
-    window.webkitRequestAnimationFrame one.checker
-    # console.log 'omg'
+    if one.runChecker
+      window.webkitRequestAnimationFrame one.checker
+      one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
+
+    console.log 'omg'
     # adrian codes here
   
   
