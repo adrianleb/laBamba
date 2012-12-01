@@ -25,7 +25,6 @@ class window.SoundMachinez
       request.send()
   
   add_to_context: (request,key) =>
-    console.log(request)
     @preloaded[request.key] = {}
     
     @preloaded[request.key].bytes = request.response
