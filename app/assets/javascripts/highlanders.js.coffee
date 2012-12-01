@@ -115,7 +115,7 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-  
+
     if ['play', 'show_word', 'show_image'].indexOf(action) > -1
       sm[action](args[0])
     else if action is 'play_note'
@@ -124,5 +124,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator(30)
+  window.ag = new AcmeGenerator(80)
   window.sm = new SoundMachinez()

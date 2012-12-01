@@ -27,7 +27,7 @@ class HighlandersController < ApplicationController
 =end
 
     # http://www.flickr.com/services/api/explore/flickr.photos.search
-    request = open("http://api.flickr.com/services/rest/?method=flickr.photos.search&privacy_filter=1&api_key=14ca15db980e203bfd67bc0dd8468aa5&text=#{CGI::escape(w)}&format=json&nojsoncallback=1")
+    request = open("http://api.flickr.com/services/rest/?method=flickr.photos.search&privacy_filter=1&api_key=14ca15db980e203bfd67bc0dd8468aa5&text=#{CGI::escape(w)}&format=json&nojsoncallback=1&safe_search=3")
     json = request.read
     photos = JSON.parse json
     if photos['photos'].present? && photos['photos']['photo'].present?
