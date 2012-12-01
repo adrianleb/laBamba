@@ -1,3 +1,26 @@
 // Place all the styles related to the highlander controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+@-webkit-keyframes spin {
+  0%   { -webkit-transform:rotateZ(0deg); }
+  100% {
+   -webkit-transform:rotateZ(720deg);
+   }
+}
+
+
+h1 {
+  margin: 0 auto;
+  margin-top: 5rem;
+  font-size:15rem;
+  text-align: center;
+  line-height: 20rem;
+  width:20rem;
+  height: 20rem;
+  // background-color: grey;
+   -webkit-animation: spin 5s infinite;
+   -webkit-animation-timing-function:linear;
+}
