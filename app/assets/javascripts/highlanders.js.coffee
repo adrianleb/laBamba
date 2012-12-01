@@ -53,7 +53,7 @@ class One
     @checker()
     if window.ag?
       window.ag.generate()
-      @acmeLoader window.ag.acme
+      @acmeLoader()
 
 
   backToPoetry: ->
@@ -62,17 +62,21 @@ class One
     @runChecker = false
 
 
-  checker: ->
+  checker: (timestamp) ->
     if one.runChecker
-      window.webkitRequestAnimationFrame one.checker
+      window.webkitRequestAnimationFrame ( (timestamp) =>
+        one.checker(timestamp)
+      )
+      one.currentTime = (timestamp - one.startTime) / 1000
+      # console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
+      @acmeChecker()
 
 
-
-  acmeLoader: (hash) ->
-    time = 0
+  acmeLoader: (hash=window.ag.acme) ->
+    @startTime = Date.now()
+    @currentTime = 0
     hash.currentTime = 0
- 
     for c in Object.keys(hash) 
       hash[c].current = 0
 
@@ -82,6 +86,11 @@ class One
 
       @[action](args)
   
+  acmeChecker: (hash=window.ag.acme) ->
+
+    for c in Object.keys(hash) 
+      console.log hash[c]
+      # hash[c].current = 0
   
   play: (arg) ->
     console.log 'play func', arg
