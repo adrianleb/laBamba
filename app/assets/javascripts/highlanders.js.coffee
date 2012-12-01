@@ -29,29 +29,30 @@ class One
 
       
   sendWords: ->
+    @text = $('#text-input').text()
     # do http request
     $.ajax
       type: 'POST'
       url: '/highlander/dictionary'
       data:
-        text: $('#text-input').text()
+        text: @text
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
       ,
       dataType: 'json'
-      # when get the response @bailaLaBamba()
 
   bailaLaBamba: ->
     $('#intro').addClass 'begone_up'
     $('#player').removeClass 'begone_down'
     @runChecker = true
-    @checker()
 
     # add the wave words to the proloader and preload
     _.each @dictionary, (word) =>
-      sm.sounds[word.id] = word.sound_url
-    sm.preload()
+      sm.sounds[word.name] = word.sound_url
+    sm.preload =>
+      @checker()
+
 
     if window.ag?
       window.ag.generate()
