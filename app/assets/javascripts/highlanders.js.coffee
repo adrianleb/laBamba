@@ -120,11 +120,11 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-
+  
     if ['play', 'show_word', 'show_image'].indexOf(action) > -1
       sm[action](args[0])
-    # else if action is 'play_note'
-      # sm[action](args[0], args[1], args[2])
+    else if action is 'play_note'
+      sm[action](args[0], args[1], args[2])
     one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
 $ ->

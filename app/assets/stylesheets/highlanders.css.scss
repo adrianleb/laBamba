@@ -151,17 +151,24 @@ section {
   box-shadow: inset 0 0 0 0.1rem black;
   // background-color: red;
   height:40rem;
+  background-size: cover;
 }
 
-#word{
-  z-index: 1;
+.player__word {
+  z-index: 2;
   font-size: 80px;
   text-align: center;
+  position: absolute;
+  top:50%;
+  left: 0;
+  width:100%;
+  // margin-left: -5rem;
   font-weight: bold;
+
   color: #fff;
-  text-shadow: 0px 0px 5px #000;
-  -webkit-text-stroke-width: 5px;
-  -webkit-text-stroke-color: #000;
+  text-shadow: 0px 0px 2px #000;
+  // -webkit-text-stroke: 5px black;
+  // -webkit-text-stroke-color: #000;
 }
 
 
