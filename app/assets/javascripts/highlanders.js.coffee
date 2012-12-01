@@ -92,13 +92,23 @@ class One
 
     for c in Object.keys(hash) 
       if typeof hash[c] is 'object'
-        for s in hash[c] 
+        index =  hash[c].current
 
-          if Math.round(s.start - one.currentTime) is 0
-            index = hash[c].indexOf s
-            unless hash[c].current is index
-              hash[c].current = index
-              @acmeAct hash[c]
+
+        if hash[c][index].start <= one.currentTime
+          hash[c].current += 1
+          @acmeAct hash[c]
+
+
+        # indexes = _.pluck hash[c], 'start'
+        # console.log one.currentTime, indexes
+        # for s in hash[c] 
+
+        #   if s.start - one.currentTime
+        #     index = hash[c].indexOf s
+        #     unless hash[c].current is index
+        #       hash[c].current = index
+        #       @acmeAct hash[c]
 
 
 
@@ -119,3 +129,4 @@ $ ->
   window.one = new One
   window.ag = new AcmeGenerator()
   window.sm = new SoundMachinez()
+  sm.preload()
