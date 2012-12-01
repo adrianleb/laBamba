@@ -32,16 +32,14 @@ class window.AcmeGenerator
     console.log("Generating music!")
     _.each @probs, (lane, instrument) =>
       
-      if lane['type'] =='simple'
+      if lane['type'] == 'simple'
         @acme[instrument] = @generate_simple_lane(lane, instrument)
 
-      if lane['type'] =='harmonic'
+      if lane['type'] == 'harmonic'
         @acme[instrument] = @generate_harmonic_lane(lane, instrument)
 
-      if lane['type'] =='harmonic'
+      if lane['type'] == 'speech'
         @acme[instrument] = @generate_speech_lane(lane, instrument)
-
-
 
   generate_simple_lane: (lane, instrument) ->
     t = 0.0
@@ -80,8 +78,8 @@ class window.AcmeGenerator
 
     while t <= @length
       _.each one.dictionary, (word) =>
-        result.push {start: t, action: 'play', arguments: [instrument, word.id]}
-        t += word.sound_duration + 0.3
+        result.push {start: t, action: 'play', arguments: [word.name]}
+        t += parseFloat(word.sound_duration) + 0.3
 
     return result
 

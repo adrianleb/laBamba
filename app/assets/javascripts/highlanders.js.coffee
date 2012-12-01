@@ -46,12 +46,13 @@ class One
     $('#intro').addClass 'begone_up'
     $('#player').removeClass 'begone_down'
     @runChecker = true
-    @checker()
 
     # add the wave words to the proloader and preload
     _.each @dictionary, (word) =>
-      sm.sounds[word.id] = word.sound_url
-    sm.preload()
+      sm.sounds[word.name] = word.sound_url
+    sm.preload =>
+      @checker()
+
 
     if window.ag?
       window.ag.generate()
@@ -70,12 +71,6 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
-<<<<<<< HEAD
-      
-      # console.log one.currentTime
-      one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
-=======
->>>>>>> 93d5738fe99a1b28f66effd3cd7d091f3525b60e
       @acmeChecker()
 
 
@@ -130,5 +125,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator(60)
+  window.ag = new AcmeGenerator(120)
   window.sm = new SoundMachinez()
