@@ -13,13 +13,11 @@ class One
     @canvas = $('#player-canvas')
 
   initEvents: ->
-    cl('one')
 
     # submit the text
     $('#text-submit').on 'click', (e) =>
       nop e
 
-      cl('loklol')
       @sendWords()
 
 
@@ -40,7 +38,6 @@ class One
         text: $('#text-input').text()
       success: (data) =>
         @dictionary = data
-        cl(@dictionary)
       ,
       dataType: 'json'
       # when get the response @bailaLaBamba()
@@ -90,18 +87,25 @@ class One
 
   acmeChecker: (hash=window.ag.acme) ->
 
-    indices = _.pluck hash, 'current'
-    for c in indices 
-      console.log c
-     
-
+    for c in Object.keys(hash) 
       if typeof hash[c] is 'object'
-        for s in hash[c] 
-          if s.start <= one.currentTime
-            index = hash[c].indexOf s
-            unless hash[c].current is index
-              hash[c].current = index
-              @acmeAct hash[c]
+        index =  hash[c].current
+
+
+        if hash[c][index].start <= one.currentTime
+          hash[c].current += 1
+          @acmeAct hash[c]
+
+
+        # indexes = _.pluck hash[c], 'start'
+        # console.log one.currentTime, indexes
+        # for s in hash[c] 
+
+        #   if s.start - one.currentTime
+        #     index = hash[c].indexOf s
+        #     unless hash[c].current is index
+        #       hash[c].current = index
+        #       @acmeAct hash[c]
 
 
 
@@ -122,3 +126,4 @@ $ ->
   window.one = new One
   window.ag = new AcmeGenerator()
   window.sm = new SoundMachinez()
+  sm.preload()
