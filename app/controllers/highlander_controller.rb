@@ -1,0 +1,2 @@
+class HighlanderController < ApplicationController
+end
