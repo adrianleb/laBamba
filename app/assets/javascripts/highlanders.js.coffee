@@ -116,7 +116,7 @@ class One
       # channel.current = 0
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-    
+
     if action is 'play'
       sm[action](args[0])
     else if action is 'play_note'

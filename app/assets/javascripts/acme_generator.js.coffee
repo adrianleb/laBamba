@@ -1,11 +1,11 @@
 class window.AcmeGenerator
   
   probs:
-    #'kick'    : type: 'simple',   probs: [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
-    #'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   1,   0  ]
-    #'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
-    'sound_1' : type: 'harmonic', octave: 4, probs: [ 0.1 ]
-    'sound_2' : type: 'harmonic', octave: 3, probs: [ 0.4, 0.8, 0.3, 0]
+    'kick'    : type: 'simple',   probs: [ 1,   0,   0,   0,   1,   0,   0,   0,   1,   0,   1,   0  ]
+    'snare'   : type: 'simple',   probs: [ 0,   0,   1,   0,   0,   0,   1,   0,   0,   0,   1,   0  ]
+    'hihat'   : type: 'simple',   probs: [ 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5]
+    'sound_1' : type: 'harmonic', octave: 6, probs: [ 0.1 ]
+    'sound_2' : type: 'harmonic', octave: 7, probs: [ 0.4, 0.8, 0.3, 0]
     'speech'   : type: 'speech'
 
   acme: {}
@@ -18,7 +18,7 @@ class window.AcmeGenerator
   scale:
     'a_minor': [21,23,24,26,28,29,31]
 
-  constructor: (tempo=120, length=10, use_scale='a_minor') ->
+  constructor: (tempo=120, length=60, use_scale='a_minor') ->
     @length = length
     @tempo = tempo
     @use_scale = use_scale
