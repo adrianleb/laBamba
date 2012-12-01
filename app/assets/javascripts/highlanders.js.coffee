@@ -29,7 +29,8 @@ class One
 
       
   sendWords: ->
-    @text = $('#text-input').text()
+    @text = $('#text-input').val()
+    console.log @text
     # do http request
     $.ajax
       type: 'POST'
@@ -119,8 +120,8 @@ class One
 
     if action is 'play'
       sm[action](args[0])
-    else if action is 'play_note'
-      sm[action](args[0], args[1], args[2])
+    # else if action is 'play_note'
+      # sm[action](args[0], args[1], args[2])
     one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
 $ ->
