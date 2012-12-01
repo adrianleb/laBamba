@@ -22,7 +22,11 @@ class One
 
     $("#logo").on 'click', (e) =>
       $("body").toggleClass('fullscreen')
-      cl "MOOO"
+    
+    $("#logo").hover ((e) =>
+      $("#logo").text('☺')), ((e) =>
+        $("#logo").text('☻'))
+      
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
@@ -113,19 +117,6 @@ class One
           if hash[c][index].start <= one.currentTime
             hash[c].current += 1
             @acmeAct hash[c]
-
-
-        # indexes = _.pluck hash[c], 'start'
-        # console.log one.currentTime, indexes
-        # for s in hash[c] 
-
-        #   if s.start - one.currentTime
-        #     index = hash[c].indexOf s
-        #     unless hash[c].current is index
-        #       hash[c].current = index
-        #       @acmeAct hash[c]
-
-
 
   acmeAct: (channel) ->
     action = channel[channel.current].action
