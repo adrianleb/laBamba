@@ -10,18 +10,19 @@ class window.SoundMachinez
   context: null
 
   constructor: ->
-    @context = new webkitAudioContext();
+    @context = new webkitAudioContext()
+    @node = @context.createJavaScriptNode(1024, 1, 1)
 
   preload: ->
 
     _.each @sounds, (path, key) =>
 
-      request = new XMLHttpRequest();
-      request.open('GET', path, true);
-      request.responseType = 'arraybuffer';
-      request.key = key;
-      request.addEventListener('load', (=>@add_to_context(request, key)), false);
-      request.send();
+      request = new XMLHttpRequest()
+      request.open('GET', path, true)
+      request.responseType = 'arraybuffer'
+      request.key = key
+      request.addEventListener('load', (=>@add_to_context(request, key)), false)
+      request.send()
   
   add_to_context: (request,key) =>
     console.log(request)
@@ -30,9 +31,9 @@ class window.SoundMachinez
     @preloaded[request.key].bytes = request.response
 
     @preloaded[request.key].initbuff = =>
-      @preloaded[request.key].buffer_source = @context.createBufferSource();
-      @preloaded[request.key].buffer_source.buffer = @context.createBuffer(@preloaded[request.key].bytes, false);
-      @preloaded[request.key].buffer_source.connect(@context.destination);
+      @preloaded[request.key].buffer_source = @context.createBufferSource()
+      @preloaded[request.key].buffer_source.buffer = @context.createBuffer(@preloaded[request.key].bytes, false)
+      @preloaded[request.key].buffer_source.connect(@context.destination)
 
     @preloaded[request.key].initbuff()
   

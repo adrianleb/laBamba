@@ -65,7 +65,7 @@ class One
         one.checker(timestamp)
       )
       one.currentTime = (timestamp - one.startTime) / 1000
-      console.log one.currentTime
+      cl one.currentTime
       # console.log one.currentTime
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
       @acmeChecker()
@@ -112,15 +112,7 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-    @[action](args)
-
-      # hash[c].current = 0
-  
-  play: (arg) ->
-    sm.play arg[0]
-
-  play_note: (arg) ->
-    # console.log 'play_note func', arg
+    sm[action](args[0])
 
 $ ->
   window.one = new One
