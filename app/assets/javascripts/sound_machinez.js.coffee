@@ -1,9 +1,9 @@
 class window.SoundMachinez
   
   sounds:
-    'kick'  : 'http://localhost:3000/sounds/kick.wav'
-    'snare' : 'sounds/snare.wav'
-    'hihat' : 'sounds/hihat.wav'
+    'kick'  : '/sounds/kick.wav'
+    'snare' : '/sounds/snare.wav'
+    'hihat' : '/sounds/hihat.wav'
 
   preloaded: {}
 
