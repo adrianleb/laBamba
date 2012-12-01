@@ -52,7 +52,7 @@ class window.SoundMachinez
     $('#word').html(word)
 
   show_image: (image) ->
-    $('#image').attr('src', image)
+    $('#player-canvas').css('backgroundImage', "url(#{image})")
 
   play_note: (instrument, frequency, length, maxvol) ->
     NotePlayer.play(@context, instrument, frequency, length*1000, maxvol)
