@@ -20,7 +20,9 @@ class One
 
       @sendWords()
 
-
+    $("#logo").on 'click', (e) =>
+      $("body").toggleClass('fullscreen')
+      cl "MOOO"
     # go back on the player
     # 
     $('#player-back').on 'click', (e) =>
@@ -35,6 +37,9 @@ class One
       
   sendWords: ->
     @text = $('#text-input').val()
+    $('#intro').addClass 'begone_up'
+    $('#loader').removeClass 'begone_down'
+
     # do http request
     $.ajax
       type: 'POST'
@@ -44,12 +49,13 @@ class One
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
+        $('#loader').addClass 'begone_up'
+        $('#player').removeClass 'begone_down'
+
       ,
       dataType: 'json'
 
   bailaLaBamba: ->
-    $('#intro').addClass 'begone_up'
-    $('#player').removeClass 'begone_down'
     @runChecker = true
 
     # add the wave words to the proloader
@@ -64,7 +70,6 @@ class One
     sm.preload =>
       @soundsPreloaded = true
       @checker()
-
 
     if window.ag?
       window.ag.generate()
@@ -126,7 +131,7 @@ class One
   acmeAct: (channel) ->
     action = channel[channel.current].action
     args = channel[channel.current].arguments
-  
+
     if ['play', 'show_word', 'show_image'].indexOf(action) > -1
       sm[action](args[0])
     else if action is 'play_note'
@@ -135,5 +140,5 @@ class One
 
 $ ->
   window.one = new One
-  window.ag = new AcmeGenerator(30)
+  window.ag = new AcmeGenerator(80)
   window.sm = new SoundMachinez()
