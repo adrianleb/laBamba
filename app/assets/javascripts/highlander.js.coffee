@@ -51,6 +51,9 @@ class One
     $('#player').removeClass 'begone_down'
     @runChecker = true
     @checker()
+    if window.ag?
+      window.ag.generate()
+      @acmeLoader window.ag.acme
 
 
   backToPoetry: ->
@@ -64,10 +67,27 @@ class One
       window.webkitRequestAnimationFrame one.checker
       one.canvas.css 'backgroundColor', "hsl(#{Math.round( (Math.random() * 255 ) )}, 30%, 70%)"
 
-    # console.log 'omg'
-    # adrian codes here
+
+
+  acmeLoader: (hash) ->
+    time = 0
+    hash.currentTime = 0
+ 
+    for c in Object.keys(hash) 
+      hash[c].current = 0
+
+      if typeof hash[c][hash[c].current] is 'object'
+        action = hash[c][hash[c].current].action
+        args = hash[c][hash[c].current].arguments
+
+      @[action](args)
   
   
+  play: (arg) ->
+    console.log 'play func', arg
+
+  play_note: (arg) ->
+    console.log 'play_note func', arg
 
 $ ->
   window.one = new One
