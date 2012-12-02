@@ -209,6 +209,7 @@ section {
     bottom: 0;
     height: 100%;
     width: 100%;
+    background-size: 100% 100%;
   }
   .player__word{
     font-size: 150px;
@@ -225,7 +226,7 @@ section {
   width:100%;
   // margin-left: -5rem;
   font-weight: bold;
-
+  text-transform: uppercase;
   color: #fff;
   text-shadow: 0px 0px 2px #000;
   // -webkit-text-stroke: 5px black;
