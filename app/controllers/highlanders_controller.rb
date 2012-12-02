@@ -7,9 +7,11 @@ class HighlandersController < ApplicationController
     dictionary = [] 
     words.each do |w|
       # TODO remove emtpy and stop words
-      word = Word.find_by_name(w)
+
+      word = Word.where("name = '#{w}'").order('RAND()').limit(1) if (Random.new().rand() < 0.8)
+      word = word[0] if word.present?
       s = sound(w)
-      word = Word.create(image: image(w), name: w, sound_url: s[:url], sound_duration: s[:duration]) unless word
+      word = Word.create(image: image(w), name: w, sound_url: s[:url], sound_duration: s[:duration]) if word.blank? or word == []
       dictionary << word
     end
 
