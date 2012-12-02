@@ -33,8 +33,14 @@ class One
       nop e
       @backToPoetry()
 
+    @handlePusher()
   sendWords: ->
-    @text = $('#text-input').val().replace(","," ").replace("("," ").replace(")"," ").replace("'"," ")
+    @text = $('#text-input').val()
+      .replace(","," ")
+      .replace("("," ")
+      .replace(")"," ")
+      .replace("'"," ")
+      .replace("'"," ")
     $('#intro').addClass 'begone_up'
     $('#loader').removeClass 'begone_down'
 
@@ -47,13 +53,32 @@ class One
       success: (data) =>
         @dictionary = data
         @bailaLaBamba()
-        $('#loader').addClass 'begone_up'
-        $('#player').removeClass 'begone_down'
+
 
       ,
       dataType: 'json'
 
+  imgLoadCallback: =>
+
+    @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
+
+    console.log @imagesToPreload, @noImagesPreloaded, (Math.round((100/@imagesToPreload) * @noImagesPreloaded) + "%")
+    $('#loader-progressbar').css 'width', (Math.round((100/@imagesToPreload) * @noImagesPreloaded) + "%")
+          # preload the sounds
+
+    if @imagesPreloaded
+      sm.preload =>
+        @soundsPreloaded = true
+        @checker()
+
+        if window.ag?
+          window.ag.generate()
+          @acmeLoader()
+
+      # @checker()
+
   bailaLaBamba: ->
+
     @runChecker = true
 
     # add the wave words to the proloader
@@ -70,25 +95,31 @@ class One
 
     @soundsPreloaded = false
     @noImagesPreloaded = 0
+    console.log @imagesToPreload, 'number of imgs'
+
+    
 
     $('#img-preloader img').on 'load', (e) =>
       cl " MIAU" 
-      @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
-      @checker()
+      @imgLoadCallback()
     $('#img-preloader img').on 'error', (e) =>
-      cl('fuck')
-      @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
-      @checker()
+      cl 'booo'
+      @imgLoadCallback()
 
 
-    # preload the sounds
-    sm.preload =>
-      @soundsPreloaded = true
-      @checker()
 
-      if window.ag?
-        window.ag.generate()
-        @acmeLoader()
+  handlePusher: ->
+    pusher = new Pusher('10cae45fefc4b7d45273')
+    channel = pusher.subscribe('word_progress')
+    channel.bind 'total_words',(data) => 
+      @words_count = data
+      @words_counted = 0
+      # alert(data);
+    channel.bind 'update',(data) => 
+      @words_counted += 1
+      console.log (Math.round((100/@words_count) * data) + "%")
+      $('#loader-progressbar').css 'width', (Math.round((100/@words_count) * @words_counted) + "%")
+
 
 
   backToPoetry: ->
@@ -109,15 +140,13 @@ class One
   acmeLoader: (hash=window.ag.acme) ->
     @startTime = Date.now()
     @currentTime = 0
-    hash.currentTime = 0
+
     for c in Object.keys(hash)
       hash[c].current = 0
 
-      if typeof hash[c][hash[c].current] is 'object'
-        action = hash[c][hash[c].current].action
-        args = hash[c][hash[c].current].arguments
+    $('#loader').addClass 'begone_up'
+    $('#player').removeClass 'begone_down'
 
-  
 
   acmeChecker: (hash=window.ag.acme) ->
 
