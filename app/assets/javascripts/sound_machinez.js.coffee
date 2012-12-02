@@ -36,7 +36,7 @@ class window.SoundMachinez
     @preloaded[request.key] = {}
     
     @preloaded[request.key].bytes = request.response
-    
+
     @preloaded[request.key].initbuff = =>
       @preloaded[request.key].buffer_source = @context.createBufferSource()
       @preloaded[request.key].buffer_source.buffer = @context.createBuffer(@preloaded[request.key].bytes, false)
@@ -60,7 +60,8 @@ class window.SoundMachinez
         filterNode = @context.createBiquadFilter()
         filterNode.type = "bandpass"
         filterNode.frequency.value = filter_freq
-        filterNode.q = 10
+        filterNode.Q.value = 0.5
+        filterNode.gain.value = 2
 
         @preloaded[request.key].buffer_source.connect(filterNode)
         filterNode.connect(@context.destination)
