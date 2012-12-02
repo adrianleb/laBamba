@@ -1,10 +1,17 @@
 require 'open-uri'
+require 'pusher'
+
+Pusher.app_id = '32812'
+Pusher.key = '10cae45fefc4b7d45273'
+Pusher.secret = '48cafd8feb9bec428fa4'
+
 
 class HighlandersController < ApplicationController
 
   def dictionary
     words = params['text'].split(/[.,!?; \t\n]/)
     dictionary = [] 
+    Pusher['word_progress'].trigger('total_words', words.length )
     words.each do |w|
       # TODO remove emtpy and stop words
 
@@ -37,6 +44,9 @@ class HighlandersController < ApplicationController
       if photo
         # http://www.flickr.com/services/api/explore/flickr.photos.getSizes
         puts "zongo: " + photo['id'].to_s
+
+        Pusher['word_progress'].trigger('update', 1)
+
         request = open("http://api.flickr.com/services/rest/?method=flickr.photos.getSizes&api_key=14ca15db980e203bfd67bc0dd8468aa5&photo_id=#{photo['id']}&format=json&nojsoncallback=1")
         json = request.read
         sizes = JSON.parse json

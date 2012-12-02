@@ -33,8 +33,14 @@ class One
       nop e
       @backToPoetry()
 
+    @handlePusher()
   sendWords: ->
-    @text = $('#text-input').val().replace(","," ").replace("("," ").replace(")"," ").replace("'"," ")
+    @text = $('#text-input').val()
+      .replace(","," ")
+      .replace("("," ")
+      .replace(")"," ")
+      .replace("'"," ")
+      .replace("'"," ")
     $('#intro').addClass 'begone_up'
     $('#loader').removeClass 'begone_down'
 
@@ -55,6 +61,9 @@ class One
   imgLoadCallback: =>
 
     @imagesPreloaded = (++@noImagesPreloaded == @imagesToPreload)
+
+    console.log @imagesToPreload, @noImagesPreloaded, (Math.round((100/@imagesToPreload) * @noImagesPreloaded) + "%")
+    $('#loader-progressbar').css 'width', (Math.round((100/@imagesToPreload) * @noImagesPreloaded) + "%")
           # preload the sounds
 
     if @imagesPreloaded
@@ -86,7 +95,7 @@ class One
 
     @soundsPreloaded = false
     @noImagesPreloaded = 0
-
+    console.log @imagesToPreload, 'number of imgs'
 
     
 
@@ -98,6 +107,18 @@ class One
       @imgLoadCallback()
 
 
+
+  handlePusher: ->
+    pusher = new Pusher('10cae45fefc4b7d45273')
+    channel = pusher.subscribe('word_progress')
+    channel.bind 'total_words',(data) => 
+      @words_count = data
+      @words_counted = 0
+      # alert(data);
+    channel.bind 'update',(data) => 
+      @words_counted += 1
+      console.log (Math.round((100/@words_count) * data) + "%")
+      $('#loader-progressbar').css 'width', (Math.round((100/@words_count) * @words_counted) + "%")
 
 
 
