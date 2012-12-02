@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import "compass";
 @import "compass/reset";
 
 
@@ -170,9 +171,11 @@ section {
     top: 0;
     height:100%;
     left: 0;
-    background: red;
+    // background: red;
     content:"";
+    @include background(linear-gradient(180deg, red, blue, pink, green, violet, yellow));
     width:0;
+    -webkit-transition: all 0.5s ease-out;
   }
 .hidden {
   opacity: 0;
