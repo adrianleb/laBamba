@@ -100,6 +100,7 @@ class window.AcmeGenerator
 
     while t <= @length
       _.each one.dictionary, (word) =>
+        console.log word
         result.push {start: t, action: 'show_word', arguments: [word.name]}
         t += parseFloat(word.sound_duration) + 0.3
 
